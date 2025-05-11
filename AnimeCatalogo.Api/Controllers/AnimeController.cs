@@ -10,6 +10,7 @@ namespace AnimeCatalogo.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class AnimeController : ControllerBase
     {
         private readonly IAnimeService _animeService;
@@ -27,7 +28,7 @@ namespace AnimeCatalogo.Api.Controllers
         public async Task<ActionResult> ObterPorId(Guid id)
         {
             var anime = await _animeRepository.ObterPorId(id);
-            if (anime == null) return NotFound();
+            if (anime == null) return NotFound("Anime não encontrado.");
             return Ok(anime);
         }
 

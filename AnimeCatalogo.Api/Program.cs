@@ -17,6 +17,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IAnimeService, AnimeService>();
 builder.Services.AddScoped<IAnimeRepository, AnimeRepository>();
 
+var environment = builder.Environment.EnvironmentName;
+Console.WriteLine($"O ambiente atual é: {environment}");
+
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 // Add services to the container.
 
 builder.Services.AddControllers();

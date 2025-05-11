@@ -36,7 +36,7 @@ namespace AnimeCatalogo.Infrastructure.Repository
         }
         public async Task<IEnumerable<Anime>> BuscarPorFiltros(string? nome, string? diretor, string? resumo, int pageNumber, int pageSize)
         {
-            var query = _context.Animes.AsQueryable();
+            var query = _context.Animes.AsNoTracking();
 
             if (!string.IsNullOrWhiteSpace(nome))
                 query = query.Where(a => a.Nome.Contains(nome));

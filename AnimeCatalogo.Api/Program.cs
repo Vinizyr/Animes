@@ -1,9 +1,9 @@
+using AnimeCatalogo.Api.Setup;
 using AnimeCatalogo.Application.IService;
 using AnimeCatalogo.Application.Service;
 using AnimeCatalogo.Application.Validators.Anime;
 using AnimeCatalogo.Infrastructure.IRepository;
 using AnimeCatalogo.Infrastructure.Persistence;
-using AnimeCatalogo.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System;
@@ -14,8 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-builder.Services.AddScoped<IAnimeService, AnimeService>();
-builder.Services.AddScoped<IAnimeRepository, AnimeRepository>();
+builder.Services.RegisterServices();
 
 var environment = builder.Environment.EnvironmentName;
 Console.WriteLine($"O ambiente atual é: {environment}");
